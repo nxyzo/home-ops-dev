@@ -6,8 +6,8 @@ metadata:
   namespace: longhorn-system
 spec:
   parentRefs:
-    - name: internal
-      namespace: kube-system
+    - name: envoy-internal
+      namespace: network
       sectionName: https
   hostnames:
     - longhorn.home-ops.dev.nxyzo.com
