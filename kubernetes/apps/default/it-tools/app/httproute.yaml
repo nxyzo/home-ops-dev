@@ -10,7 +10,7 @@ spec:
       namespace: network
       sectionName: https
   hostnames:
-    - it-tools.home-ops.dev.nxyzo.com
+    - it-tools.nxyzo.com
   rules:
     - backendRefs:
         - name: it-tools
