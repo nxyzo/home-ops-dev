@@ -12,6 +12,7 @@ spec:
   values:
     controllers:
       it-tools:
+        replicas: 3
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
