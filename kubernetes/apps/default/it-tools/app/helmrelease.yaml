@@ -4,11 +4,12 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: it-tools
+  namespace: default
 spec:
+  interval: 1h
   chartRef:
     kind: OCIRepository
     name: it-tools
-  interval: 1h
   values:
     controllers:
       it-tools:
@@ -23,23 +24,21 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
-              capabilities: {drop: ["ALL"]}
-            volumeMounts:
-          - name: nginx-cache
-            mountPath: /var/cache/nginx
-          - name: nginx-run
-            mountPath: /var/run
-          - name: tmp
-            mountPath: /tmp
-      - name: nginx-run
-        emptyDir: {}
-      - name: tmp
-        emptyDir: {}
+              capabilities:
+                drop: ["ALL"]
             resources:
               requests:
                 cpu: 100m
               limits:
                 memory: 250Mi
+            volumeMounts:
+              - name: nginx-cache
+                mountPath: /var/cache/nginx
+              - name: nginx-run
+                mountPath: /var/run
+              - name: tmp
+                mountPath: /tmp
+
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -47,7 +46,13 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+
     volumes:
       - name: nginx-cache
-        persistentVolumeClaim:
-          claimName: it-tools-nginx-cache
+        emptyDir: {}
+      - name: nginx-run
+        emptyDir:
+          medium: Memory
+      - name: tmp
+        emptyDir:
+          medium: Memory
