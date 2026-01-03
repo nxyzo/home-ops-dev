@@ -18,12 +18,19 @@ spec:
               repository: ghcr.io/corentinth/it-tools
               tag: 2024.10.22-7ca5933
             ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-
+              - name: http
+                containerPort: 80
+                protocol: TCP
             resources:
               requests:
                 cpu: 100m
+                memory: 250Mi
               limits:
                 memory: 250Mi
+
+    service:
+      app:
+        controller: it-tools
+        ports:
+          http:
+            port: 80
