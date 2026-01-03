@@ -21,8 +21,19 @@ spec:
               tag: 2024.10.22-7ca5933
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
+              readOnlyRootFilesystem: true
               capabilities: {drop: ["ALL"]}
+            volumeMounts:
+          - name: nginx-cache
+            mountPath: /var/cache/nginx
+          - name: nginx-run
+            mountPath: /var/run
+          - name: tmp
+            mountPath: /tmp
+      - name: nginx-run
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
             resources:
               requests:
                 cpu: 100m
@@ -35,3 +46,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+    volumes:
+      - name: nginx-cache
+        persistentVolumeClaim:
+          claimName: it-tools-nginx-cache
