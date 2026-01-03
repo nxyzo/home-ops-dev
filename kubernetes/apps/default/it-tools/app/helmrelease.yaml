@@ -19,18 +19,13 @@ spec:
               tag: 2024.10.22-7ca5933
 
             securityContext:
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop: ["ALL"]
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop: ["ALL"]
 
             resources:
               requests:
                 cpu: 100m
               limits:
                 memory: 250Mi
-
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
