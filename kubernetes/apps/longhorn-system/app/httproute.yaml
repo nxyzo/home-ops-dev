@@ -8,7 +8,6 @@ spec:
   parentRefs:
     - name: internal
       namespace: longhorn-system
-  tls:
       sectionName: https
   hostnames:
     - longhorn.home-ops.dev.nxyzo.com
