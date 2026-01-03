@@ -13,7 +13,6 @@ spec:
         kind: HelmRepository
         name: longhorn-repo
         namespace: longhorn-system
-      dependsOn: []
   install:
     createNamespace: false
   upgrade:
