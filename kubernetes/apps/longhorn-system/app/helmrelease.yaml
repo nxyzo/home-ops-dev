@@ -15,7 +15,9 @@ spec:
         namespace: longhorn-system
   install:
     createNamespace: false
+    crds: CreateReplace
   upgrade:
+    crds: CreateReplace
     remediation:
       retries: 3
   values:
