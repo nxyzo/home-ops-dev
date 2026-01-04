@@ -1,25 +1,19 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app longhorn
+  name: longhorn-release
   namespace: longhorn-system
 spec:
-  interval: 5m0s
   chart:
     spec:
       chart: longhorn
-      version: "1.10.1"
+      reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: longhorn-repo
-        namespace: longhorn-system
-  install:
-    createNamespace: false
-    crds: CreateReplace
-  upgrade:
-    crds: CreateReplace
-    remediation:
-      retries: 3
+      version: v1.10.1
+  interval: 1m0s
   values:
     persistence:
       defaultClass: true
@@ -39,12 +33,3 @@ spec:
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       backupTarget: s3://home-ops-dev-longhorn-backup@hel1/
       backupTargetCredentialSecret: longhorn-backup-s3
-
-      recurringJobs:
-        - name: daily-backup
-          task: backup
-          cron: "0 2 * * *"
-          retain: 7
-          concurrency: 2
-          labels:
-            recurring-job-group.longhorn.io/default: "true"
