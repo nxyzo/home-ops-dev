@@ -1,0 +1,13 @@
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: backup-target
+  namespace: longhorn-system
+value: s3://home-ops-dev-longhorn-backup@hel1/?endpoint=https://hel1.your-objectstorage.com
+---
+apiVersion: longhorn.io/v1beta2
+kind: Setting
+metadata:
+  name: backup-target-credential-secret
+  namespace: longhorn-system
+value: longhorn-backup-s3
