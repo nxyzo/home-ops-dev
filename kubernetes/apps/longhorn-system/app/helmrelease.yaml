@@ -31,5 +31,5 @@ spec:
       guaranteedReplicaManagerCPU: 0.25
       replicaAutoBalance: best-effort
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
-      backupTarget: backupTarget: s3://home-ops-dev-longhorn-backup@hel1/?endpoint=https://hel1.your-objectstorage.com
+      backupTarget: s3://home-ops-dev-longhorn-backup@hel1/?endpoint=https://hel1.your-objectstorage.com
       backupTargetCredentialSecret: longhorn-backup-s3
