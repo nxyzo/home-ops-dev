@@ -7,4 +7,3 @@ resources:
   - ./httproute.yaml
   - ./namespace.yaml
   - ./secret.sops.yaml
-  - ./longhorn-setting.yaml
