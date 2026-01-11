@@ -231,4 +231,5 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/machine-tuppr-config.yaml"
 
